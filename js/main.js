@@ -24,7 +24,9 @@ const MESSAGES = [
 const MESSAGES_MIN = 0;
 const MESSAGES_MAX = 5;
 const NAMES = ['Артем', 'Степан', 'Василий', 'Валя', 'Маша'];
-let counter = 0;
+const NAMES_MIN = 0;
+const NAMES_MAX = 4;
+let counter = 1;
 let cCounter = 0;
 
 
@@ -39,7 +41,7 @@ export const photos = new Array(OBJECTS_COUNT).fill().map(function () {
   }
   counter++;
   return photoObj;
-})
+});
 
 
 const comments = new Array(COMMENTS_COUNT).fill().map(function () {
@@ -52,4 +54,4 @@ const comments = new Array(COMMENTS_COUNT).fill().map(function () {
   }
   cCounter++;
   return commentObj;
-}
+});
