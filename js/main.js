@@ -29,10 +29,22 @@ const NAMES_MAX = 4;
 let counter = 1;
 let cCounter = 0;
 
+let comments = new Array(COMMENTS_COUNT).fill().map(function () {
 
-export const photos = new Array(OBJECTS_COUNT).fill().map(function () {
+  const commentObj = {
+    id: cCounter,
+    avatar: `img/avatar-${getRandomInt(AVATAR_MIN, AVATAR_MAX)}.svg`,
+    message: MESSAGES[getRandomInt(MESSAGES_MIN, MESSAGES_MAX)] + MESSAGES[getRandomInt(MESSAGES_MIN, MESSAGES_MAX)],
+    name: NAMES[getRandomInt(NAMES_MIN, NAMES_MAX)],
+  }
+  cCounter++;
+  return commentObj;
+});
 
-  const photoObj = {
+
+export let photos = new Array(OBJECTS_COUNT).fill().map(function () {
+
+  let photoObj = {
     id: counter,
     url: `photos/${counter}.jpg`,
     description: DESCRIPTIONS[counter],
@@ -44,14 +56,3 @@ export const photos = new Array(OBJECTS_COUNT).fill().map(function () {
 });
 
 
-const comments = new Array(COMMENTS_COUNT).fill().map(function () {
-
-  const commentObj = {
-    id: cCounter,
-    avatar: `img/avatar-${getRandomInt(AVATAR_MIN, AVATAR_MAX)}.svg`,
-    message: MESSAGES[getRandomInt(MESSAGES_MIN, MESSAGES_MAX)] + MESSAGES[getRandomInt(MESSAGES_MIN, MESSAGES_MAX)],
-    name: NAMES[getRandomInt(NAMES_MIN, NAMES_MAX)],
-  }
-  cCounter++;
-  return commentObj;
-});
