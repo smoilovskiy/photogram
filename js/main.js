@@ -1,5 +1,6 @@
 
 import { getRandomInt } from './randomGen.js';
+import { createPreview } from './preview.js';
 
 const OBJECTS_COUNT = 25;
 const COMMENTS_COUNT = 100;
@@ -55,4 +56,7 @@ export let photos = new Array(OBJECTS_COUNT).fill().map(function () {
   return photoObj;
 });
 
-
+console.log(photos[0]);
+for (let i = 0; i < photos.length; i++) {
+  createPreview(photos[i]);
+}
