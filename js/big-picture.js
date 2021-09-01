@@ -1,12 +1,18 @@
-export function showBigImage() {
+export function showBigImage(photos) {
 
-let picture  = document.querySelector('.pictures'); // assuming pictures exists
-picture.addEventListener('click', function(evt) {
+let pictures = document.querySelector('.pictures'); // assuming pictures exists
+pictures.addEventListener('click', function(evt) {
 
 if (evt.target.className === 'picture__img') {
+  let id = evt.target.getAttribute('data-id') - 1;
+  console.log('id', id);
 
-  let id = picture.querySelector('.picture__img').getAttribute('id');
-  console.log(id)
+  let bigImage = document.querySelector('.big-picture');
+  let bigPictureImg = bigImage.querySelector('.big-picture__img').querySelector('img');
+  bigImage.classList.remove('hidden');
+  bigPictureImg.src = photos[id].url;
+
+  console.log(bigImage.src);
 }
 
 });

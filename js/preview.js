@@ -17,7 +17,7 @@ let pictureComments = pictureInfo.querySelector('.picture__comments');
 pictureComments.innerText = firstPhoto.comments.length;
 pictureLikes.innerText = firstPhoto.likes;
 previewImg.src = firstPhoto.url;
-previewImg.id = firstPhoto.id;
+previewImg.dataset.id = firstPhoto.id;
 
 fragment.appendChild(preview);
 pictures.appendChild(fragment);

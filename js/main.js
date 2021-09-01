@@ -65,5 +65,5 @@ for (let i = 0; i < photos.length; i++) {
   createPreview(photos[i]);
 }
 
-showBigImage();
+showBigImage(photos);
 // console.log(picture);
