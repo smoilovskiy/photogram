@@ -1,6 +1,10 @@
 
 import { getRandomInt } from './randomGen.js';
 import { createPreview } from './preview.js';
+import { showBigImage } from './big-picture.js';
+
+
+
 
 const OBJECTS_COUNT = 25;
 const COMMENTS_COUNT = 100;
@@ -60,3 +64,6 @@ console.log(photos[0]);
 for (let i = 0; i < photos.length; i++) {
   createPreview(photos[i]);
 }
+
+showBigImage();
+// console.log(picture);
