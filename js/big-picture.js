@@ -7,12 +7,19 @@ if (evt.target.className === 'picture__img') {
   let id = evt.target.getAttribute('data-id') - 1;
   console.log('id', id);
 
-  let bigImage = document.querySelector('.big-picture');
-  let bigPictureImg = bigImage.querySelector('.big-picture__img').querySelector('img');
-  bigImage.classList.remove('hidden');
-  bigPictureImg.src = photos[id].url;
+  let bigPicture = document.querySelector('.big-picture');
+  let bigPictureImg = bigPicture.querySelector('.big-picture__img').querySelector('img');
+  let bigPictureSocial = bigPicture.querySelector('.big-picture__social');
+  let socialLikes = bigPictureSocial.querySelector('.social__likes');
+  let likes = socialLikes.querySelector('.likes-count');
 
-  console.log(bigImage.src);
+
+  bigPicture.classList.remove('hidden');
+  bigPictureImg.src = photos[id].url;
+  bigPictureImg.alt = photos[id].description;
+  likes.innerHTML = photos[id].likes;
+
+
 }
 
 });
