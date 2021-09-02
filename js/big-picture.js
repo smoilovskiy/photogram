@@ -1,24 +1,32 @@
 export function showBigImage(photos) {
 
 let pictures = document.querySelector('.pictures'); // assuming pictures exists
+let bigPicture = document.querySelector('.big-picture');
+
 pictures.addEventListener('click', function(evt) {
 
 if (evt.target.className === 'picture__img') {
   let id = evt.target.getAttribute('data-id') - 1;
-  console.log('id', id);
 
-  let bigPicture = document.querySelector('.big-picture');
   let bigPictureImg = bigPicture.querySelector('.big-picture__img').querySelector('img');
   let bigPictureSocial = bigPicture.querySelector('.big-picture__social');
   let socialLikes = bigPictureSocial.querySelector('.social__likes');
   let likes = socialLikes.querySelector('.likes-count');
-
+  let commentsCount = bigPictureSocial.querySelector('.comments-count');
+  let socialCommentImg = bigPictureSocial.querySelector('.social__comment').querySelector('img');
+  let socialCommentText = bigPictureSocial.querySelector('.social__text');
 
   bigPicture.classList.remove('hidden');
+
   bigPictureImg.src = photos[id].url;
   bigPictureImg.alt = photos[id].description;
   likes.innerHTML = photos[id].likes;
+  commentsCount.innerHTML = photos[id].comments.length;
 
+
+  socialCommentImg.src = photos[id].comments[0].avatar;
+  socialCommentImg.alt = photos[id].comments[0].name;
+  socialCommentText.innerHTML = photos[id].comments[0].message;
 
 }
 
@@ -26,23 +34,16 @@ if (evt.target.className === 'picture__img') {
 
 
 
-// window.addEventListener('click', templateClick);
-// window.addEventListener('keydown', templateKey);
+window.addEventListener('click', function(evt) {
+  if (evt.target.id === 'picture-cancel') {
+    bigPicture.classList.add('hidden');
+  }
+});
 
-// function templateClick(evt) {
-
-//   if (evt.target.className === 'success') {
-
-//     elem.style.display = 'none';
-//     document.location.reload();
-//   }
-// }
-
-// function templateKey(ev) {
-//   if (ev.keyCode == 27) {
-//     elem.style.display = 'none';
-//     document.location.reload();
-//   }
-// }
+window.addEventListener('keydown', function(evt) {
+  if (evt.key === 'Escape') {
+    bigPicture.classList.add('hidden');
+  }
+});
 
 }

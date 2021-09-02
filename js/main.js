@@ -66,4 +66,3 @@ for (let i = 0; i < photos.length; i++) {
 }
 
 showBigImage(photos);
-// console.log(picture);
