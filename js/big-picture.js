@@ -2,11 +2,20 @@ export function showBigImage(photos) {
 
 let pictures = document.querySelector('.pictures'); // assuming pictures exists
 let bigPicture = document.querySelector('.big-picture');
+let body = document.querySelector('body');
 
 pictures.addEventListener('click', function(evt) {
 
 if (evt.target.className === 'picture__img') {
   let id = evt.target.getAttribute('data-id') - 1;
+
+  //from task
+  let socialCommentCount = document.querySelector('.social__comment-count');
+  let commentsLoader = document.querySelector('.comments-loader');
+  socialCommentCount.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
+
+  body.classList.add('modal-open');
 
   let bigPictureImg = bigPicture.querySelector('.big-picture__img').querySelector('img');
   let bigPictureSocial = bigPicture.querySelector('.big-picture__social');
@@ -37,12 +46,14 @@ if (evt.target.className === 'picture__img') {
 window.addEventListener('click', function(evt) {
   if (evt.target.id === 'picture-cancel') {
     bigPicture.classList.add('hidden');
+    body.classList.remove('modal-open');
   }
 });
 
 window.addEventListener('keydown', function(evt) {
   if (evt.key === 'Escape') {
     bigPicture.classList.add('hidden');
+    body.classList.remove('modal-open');
   }
 });
 
