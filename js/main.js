@@ -1,4 +1,3 @@
-
 import { getRandomInt } from './randomGen.js';
 import { createPreview } from './preview.js';
 import { showBigImage } from './big-picture.js';
@@ -7,7 +6,8 @@ import { showBigImage } from './big-picture.js';
 
 
 const OBJECTS_COUNT = 25;
-const COMMENTS_COUNT = 100;
+const COMMENTS_COUNT_MIN = 0;
+const COMMENTS_COUNT_MAX = 100;
 const DESCRIPTIONS = ['description1', 'description2', 'description3', 'description4',
   'description5', 'description6', 'description7', 'description8', 'description9',
   'description10', 'description11', 'description12', 'description13', 'description14',
@@ -34,18 +34,6 @@ const NAMES_MAX = 4;
 let counter = 1;
 let cCounter = 0;
 
-let comments = new Array(COMMENTS_COUNT).fill().map(function () {
-
-  const commentObj = {
-    id: cCounter,
-    avatar: `img/avatar-${getRandomInt(AVATAR_MIN, AVATAR_MAX)}.svg`,
-    message: MESSAGES[getRandomInt(MESSAGES_MIN, MESSAGES_MAX)] + MESSAGES[getRandomInt(MESSAGES_MIN, MESSAGES_MAX)],
-    name: NAMES[getRandomInt(NAMES_MIN, NAMES_MAX)],
-  }
-  cCounter++;
-  return commentObj;
-});
-
 
 export let photos = new Array(OBJECTS_COUNT).fill().map(function () {
 
@@ -54,11 +42,23 @@ export let photos = new Array(OBJECTS_COUNT).fill().map(function () {
     url: `photos/${counter}.jpg`,
     description: DESCRIPTIONS[counter],
     likes: getRandomInt(LIKES_MIN, LIKES_MAX),
-    comments,
+
+    comments: new Array(getRandomInt(COMMENTS_COUNT_MIN, COMMENTS_COUNT_MAX)).fill().map(function () {
+      let commentObj = {
+        id: cCounter,
+        avatar: `img/avatar-${getRandomInt(AVATAR_MIN, AVATAR_MAX)}.svg`,
+        message: MESSAGES[getRandomInt(MESSAGES_MIN, MESSAGES_MAX)] + MESSAGES[getRandomInt(MESSAGES_MIN, MESSAGES_MAX)],
+        name: NAMES[getRandomInt(NAMES_MIN, NAMES_MAX)],
+      }
+      cCounter++;
+      return commentObj;
+    })
   }
   counter++;
   return photoObj;
 });
+
+
 
 console.log(photos[0]);
 for (let i = 0; i < photos.length; i++) {

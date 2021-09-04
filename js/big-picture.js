@@ -7,13 +7,14 @@ let body = document.querySelector('body');
 pictures.addEventListener('click', function(evt) {
 
 if (evt.target.className === 'picture__img') {
-  let id = evt.target.getAttribute('data-id') - 1;
+  
 
   //from task
   let socialCommentCount = document.querySelector('.social__comment-count');
   let commentsLoader = document.querySelector('.comments-loader');
   socialCommentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
+
 
   body.classList.add('modal-open');
 
@@ -27,6 +28,7 @@ if (evt.target.className === 'picture__img') {
 
   bigPicture.classList.remove('hidden');
 
+  let id = evt.target.getAttribute('data-id') - 1;
   bigPictureImg.src = photos[id].url;
   bigPictureImg.alt = photos[id].description;
   likes.innerHTML = photos[id].likes;
