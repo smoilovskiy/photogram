@@ -1,6 +1,3 @@
-import { photos } from './main.js';
-
-
 export function createPreview(firstPhoto) {
 
 
