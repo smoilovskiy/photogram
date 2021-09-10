@@ -30,7 +30,7 @@ export function upload() {
   });
 
   window.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Escape') {
+    if (evt.key === 'Escape' && evt.target.className !== 'text__hashtags' && evt.target.className !== 'text__description') {
       uploadImgPopup.classList.add('hidden');
       body.classList.remove('modal-open');
     }
