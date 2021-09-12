@@ -13,15 +13,19 @@ export function validation() {
         return;
     }
 
+
+
     for (var i = 0; i < hashtagsArray.length; i++) {
       if (hashtagsArray[i] === '#' || hashtagsArray[i].length === 1) {
         hashtagsInput.setCustomValidity('Hashtag must contains more than 1 symbol');
         break;
       }
+
       if (hashtagsArray[i].length > 20) {
         hashtagsInput.setCustomValidity('Hashtags length can not be bigger than 20');
         break;
       }
+      
       if (hashtagsArray[i].charAt(0) !== '#') {
         hashtagsInput.setCustomValidity('Hashtag must starts with #');
         break;
