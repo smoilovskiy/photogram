@@ -3,6 +3,21 @@ export function showBigImage(photos) {
   let pictures = document.querySelector('.pictures');
   let bigPicture = document.querySelector('.big-picture');
   let body = document.querySelector('body');
+  let hashtagsInput = document.querySelector('.text__hashtags');
+  let textCommentInput = document.querySelector('.text__description');
+
+
+  textCommentInput.addEventListener('focus', function() {
+    window.removeEventListener('keydown', escapeHandler )
+  })
+
+  hashtagsInput.addEventListener('focus', function() {
+    window.removeEventListener('keydown', escapeHandler )
+  })
+
+  hashtagsInput.addEventListener('blur', function() {
+    window.addEventListener('keydown', escapeHandler )
+  })  
 
   pictures.addEventListener('click', function (evt) {
 
@@ -56,11 +71,14 @@ export function showBigImage(photos) {
     }
   });
 
-  window.addEventListener('keydown', function (evt) {
+  function escapeHandler(evt) {
     if (evt.key === 'Escape') {
       bigPicture.classList.add('hidden');
       body.classList.remove('modal-open');
+
     }
-  });
+  }
+
+  window.addEventListener('keydown', escapeHandler );
 
 }
