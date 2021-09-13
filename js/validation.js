@@ -4,7 +4,16 @@ export function validation() {
 
   hashtagsInput.addEventListener("change", function () {
     let hashtagsLowercase = hashtagsInput.value.toLowerCase();
+    let specialSymbols = `!@$%^&*()+=-[]\\\';,./{}|\":<>?`;
     let hashtagsArray = hashtagsLowercase.split(' ');
+
+
+    for (let i = 0; i < hashtagsLowercase.length; i++) {
+      if (specialSymbols.indexOf(hashtagsLowercase.charAt(i)) != -1) {
+        hashtagsInput.setCustomValidity('Use of special characters is not allowed');
+        return;
+      }
+    }
 
     if (hashtagsArray.length > 5) {
       console.log('Too many hashtags. Must be up to 5');
