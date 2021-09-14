@@ -64,9 +64,11 @@ export function showBigImage(photos) {
 
       if (newComments.length <= COMMENTS_COUNT) {
         comments.innerHTML = newComments.join('');
+        socialCommentCount.classList.remove('hidden');
+        socialCommentCount.innerHTML = newComments.length + ' из ' + newComments.length + ' комментариев';
       } else {
         let commentsCounter = 5;
-        comments.innerHTML = newComments.slice(0, 5).join('');
+        comments.innerHTML = newComments.slice(0, commentsCounter).join('');
         socialCommentCount.classList.remove('hidden');
         commentsLoader.classList.remove('hidden');
 
@@ -75,7 +77,8 @@ export function showBigImage(photos) {
         loadMoreComments.addEventListener('click', function () {
           commentsCounter += 5;
           comments.innerHTML = newComments.slice(0, commentsCounter).join('');
-          if (newComments.length < commentsCounter) {
+
+          if (newComments.length <= commentsCounter) {
             commentsCounter = newComments.length;
             commentsLoader.classList.add('hidden');
           }
