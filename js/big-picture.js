@@ -7,17 +7,17 @@ export function showBigImage(photos) {
   let textCommentInput = document.querySelector('.text__description');
 
 
-  textCommentInput.addEventListener('focus', function() {
-    window.removeEventListener('keydown', escapeHandler )
+  textCommentInput.addEventListener('focus', function () {
+    window.removeEventListener('keydown', escapeHandler)
   })
 
-  hashtagsInput.addEventListener('focus', function() {
-    window.removeEventListener('keydown', escapeHandler )
+  hashtagsInput.addEventListener('focus', function () {
+    window.removeEventListener('keydown', escapeHandler)
   })
 
-  hashtagsInput.addEventListener('blur', function() {
-    window.addEventListener('keydown', escapeHandler )
-  })  
+  hashtagsInput.addEventListener('blur', function () {
+    window.addEventListener('keydown', escapeHandler)
+  })
 
   pictures.addEventListener('click', function (evt) {
 
@@ -58,9 +58,17 @@ export function showBigImage(photos) {
     <img class="social__picture" src='${comment.avatar}' alt="Аватар комментатора фотографии" width="35" height="35">
     <p class="social__text">${comment.message}</p>
   </li>`
-      }).join('');
-      comments.innerHTML = newComments;
+      })
+
+      if (newComments.length <= 5) {
+        comments.innerHTML = newComments.join('');
+      } else {
+        comments.innerHTML = newComments.slice(0, 5).join('');
+        socialCommentCount.classList.remove('hidden');
+        commentsLoader.classList.remove('hidden');
+      }
     }
+
 
   });
 
@@ -79,6 +87,6 @@ export function showBigImage(photos) {
     }
   }
 
-  window.addEventListener('keydown', escapeHandler );
+  window.addEventListener('keydown', escapeHandler);
 
 }
