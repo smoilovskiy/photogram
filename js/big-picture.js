@@ -75,6 +75,10 @@ export function showBigImage(photos) {
         loadMoreComments.addEventListener('click', function () {
           commentsCounter += 5;
           comments.innerHTML = newComments.slice(0, commentsCounter).join('');
+          if (newComments.length < commentsCounter) {
+            commentsCounter = newComments.length;
+            commentsLoader.classList.add('hidden');
+          }
           socialCommentCount.innerHTML = commentsCounter + ' из ' + newComments.length + ' комментариев';
         })
       }
