@@ -1,3 +1,5 @@
+const COMMENTS_COUNT = 5;
+
 export function showBigImage(photos) {
 
   let pictures = document.querySelector('.pictures');
@@ -60,12 +62,21 @@ export function showBigImage(photos) {
   </li>`
       })
 
-      if (newComments.length <= 5) {
+      if (newComments.length <= COMMENTS_COUNT) {
         comments.innerHTML = newComments.join('');
       } else {
+        let commentsCounter = 5;
         comments.innerHTML = newComments.slice(0, 5).join('');
         socialCommentCount.classList.remove('hidden');
         commentsLoader.classList.remove('hidden');
+
+        let loadMoreComments = document.querySelector('.social__comments-loader');
+
+        loadMoreComments.addEventListener('click', function () {
+          commentsCounter += 5;
+          comments.innerHTML = newComments.slice(0, commentsCounter).join('');
+          socialCommentCount.innerHTML = commentsCounter + ' из ' + newComments.length + ' комментариев';
+        })
       }
     }
 
