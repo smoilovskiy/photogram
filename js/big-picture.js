@@ -1,12 +1,19 @@
 const COMMENTS_COUNT = 5;
+let commentsCount = document.querySelector('.comments-count');
+let commentsCounter = COMMENTS_COUNT;
+let socialCommentCount = document.querySelector('.social__comment-count');
+let bigPicture = document.querySelector('.big-picture');
+let body = document.querySelector('body');
+let hashtagsInput = document.querySelector('.text__hashtags');
+let textCommentInput = document.querySelector('.text__description');
+let bigPictureImg = bigPicture.querySelector('.big-picture__img').querySelector('img');
+let bigPictureSocial = bigPicture.querySelector('.big-picture__social');
+let socialLikes = bigPictureSocial.querySelector('.social__likes');
+let likes = socialLikes.querySelector('.likes-count');
+let pictures = document.querySelector('.pictures');
+
 
 export function showBigImage(photos) {
-
-  let pictures = document.querySelector('.pictures');
-  let bigPicture = document.querySelector('.big-picture');
-  let body = document.querySelector('body');
-  let hashtagsInput = document.querySelector('.text__hashtags');
-  let textCommentInput = document.querySelector('.text__description');
 
 
   textCommentInput.addEventListener('focus', function () {
@@ -24,24 +31,9 @@ export function showBigImage(photos) {
   pictures.addEventListener('click', function (evt) {
 
     if (evt.target.className === 'picture__img') {
-
-
-      //from task
-      let socialCommentCount = document.querySelector('.social__comment-count');
-      let commentsLoader = document.querySelector('.comments-loader');
-      socialCommentCount.classList.add('hidden');
-      commentsLoader.classList.add('hidden');
-
-
-      body.classList.add('modal-open');
-
-      let bigPictureImg = bigPicture.querySelector('.big-picture__img').querySelector('img');
-      let bigPictureSocial = bigPicture.querySelector('.big-picture__social');
-      let socialLikes = bigPictureSocial.querySelector('.social__likes');
-      let likes = socialLikes.querySelector('.likes-count');
-      let commentsCount = bigPictureSocial.querySelector('.comments-count');
-
-      bigPicture.classList.remove('hidden');
+      let comments = document.querySelector('.social__comments');
+      comments.innerHTML = '';
+      commentsCounter = COMMENTS_COUNT;
 
       let id = evt.target.getAttribute('data-id') - 1;
       bigPictureImg.src = photos[id].url;
@@ -49,25 +41,37 @@ export function showBigImage(photos) {
       likes.innerHTML = photos[id].likes;
       commentsCount.innerHTML = photos[id].comments.length;
 
+
+      socialCommentCount.innerHTML = '5 из ' + photos[id].comments.length + ' комментариев';
+
+
+
+      let commentsLoader = document.querySelector('.comments-loader');
+      commentsLoader.classList.add('hidden');
+
+      body.classList.add('modal-open');
+
+      bigPicture.classList.remove('hidden');
+
       let socialCaption = document.querySelector('.social__caption');
 
       socialCaption.innerHTML = photos[id].description;
 
 
-      let comments = document.querySelector('.social__comments');
       let newComments = photos[id].comments.map(comment => {
         return `<li class="social__comment">
-    <img class="social__picture" src='${comment.avatar}' alt="Аватар комментатора фотографии" width="35" height="35">
-    <p class="social__text">${comment.message}</p>
-  </li>`
+        <img class="social__picture" src='${comment.avatar}' alt="Аватар комментатора фотографии" width="35" height="35">
+        <p class="social__text">${comment.message}</p>
+        </li>`
       })
 
       if (newComments.length <= COMMENTS_COUNT) {
+        //commentsCounter = COMMENTS_COUNT;
         comments.innerHTML = newComments.join('');
         socialCommentCount.classList.remove('hidden');
         socialCommentCount.innerHTML = newComments.length + ' из ' + newComments.length + ' комментариев';
       } else {
-        let commentsCounter = COMMENTS_COUNT;
+        //commentsCounter = COMMENTS_COUNT;
         comments.innerHTML = newComments.slice(0, commentsCounter).join('');
         socialCommentCount.classList.remove('hidden');
         commentsLoader.classList.remove('hidden');
