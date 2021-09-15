@@ -11,6 +11,10 @@ let bigPictureSocial = bigPicture.querySelector('.big-picture__social');
 let socialLikes = bigPictureSocial.querySelector('.social__likes');
 let likes = socialLikes.querySelector('.likes-count');
 let pictures = document.querySelector('.pictures');
+let commentsLoader = document.querySelector('.comments-loader');
+let socialCaption = document.querySelector('.social__caption');
+let loadMoreComments = document.querySelector('.social__comments-loader');
+let comments = document.querySelector('.social__comments');
 
 
 export function showBigImage(photos) {
@@ -31,7 +35,7 @@ export function showBigImage(photos) {
   pictures.addEventListener('click', function (evt) {
 
     if (evt.target.className === 'picture__img') {
-      let comments = document.querySelector('.social__comments');
+
       comments.innerHTML = '';
       commentsCounter = COMMENTS_COUNT;
 
@@ -43,17 +47,10 @@ export function showBigImage(photos) {
 
 
       socialCommentCount.innerHTML = '5 из ' + photos[id].comments.length + ' комментариев';
-
-
-
-      let commentsLoader = document.querySelector('.comments-loader');
       commentsLoader.classList.add('hidden');
-
       body.classList.add('modal-open');
-
       bigPicture.classList.remove('hidden');
 
-      let socialCaption = document.querySelector('.social__caption');
 
       socialCaption.innerHTML = photos[id].description;
 
@@ -71,17 +68,16 @@ export function showBigImage(photos) {
         socialCommentCount.classList.remove('hidden');
         socialCommentCount.innerHTML = newComments.length + ' из ' + newComments.length + ' комментариев';
       } else {
-        //commentsCounter = COMMENTS_COUNT;
+        commentsCounter = COMMENTS_COUNT;
         comments.innerHTML = newComments.slice(0, commentsCounter).join('');
         socialCommentCount.classList.remove('hidden');
         commentsLoader.classList.remove('hidden');
 
-        let loadMoreComments = document.querySelector('.social__comments-loader');
-
         loadMoreComments.addEventListener('click', function () {
-          commentsCounter += 5;
+          commentsCounter = commentsCounter + 5;
+          console.log(commentsCounter);
           comments.innerHTML = newComments.slice(0, commentsCounter).join('');
-
+    
           if (newComments.length <= commentsCounter) {
             commentsCounter = newComments.length;
             commentsLoader.classList.add('hidden');
@@ -105,7 +101,6 @@ export function showBigImage(photos) {
     if (evt.key === 'Escape') {
       bigPicture.classList.add('hidden');
       body.classList.remove('modal-open');
-
     }
   }
 
