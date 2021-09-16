@@ -89,25 +89,18 @@ export function showBigImage(photos) {
 
           window.addEventListener('click', function (evt) {
             if (evt.target.id === 'picture-cancel') {
-              bigPicture.classList.add('hidden');
-              body.classList.remove('modal-open');
-              loadMoreComments.removeEventListener('click', loadMoreCommentsHandler)
+              loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
             }
           });
 
-          function escapeHandler(evt) {
+          window.addEventListener('keydown', function (evt) {
             if (evt.key === 'Escape') {
-              bigPicture.classList.add('hidden');
-              body.classList.remove('modal-open');
-              loadMoreComments.removeEventListener('click', loadMoreCommentsHandler)
+              loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
             }
-          }
-        
-          window.addEventListener('keydown', escapeHandler);
-
+          });
         }
 
-        loadMoreComments.addEventListener('click', loadMoreCommentsHandler)
+        loadMoreComments.addEventListener('click', loadMoreCommentsHandler);
       }
     }
 
