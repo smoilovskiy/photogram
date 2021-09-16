@@ -73,17 +73,41 @@ export function showBigImage(photos) {
         socialCommentCount.classList.remove('hidden');
         commentsLoader.classList.remove('hidden');
 
-        loadMoreComments.addEventListener('click', function () {
-          commentsCounter = commentsCounter + 5;
+
+        function loadMoreCommentsHandler() {
+          commentsCounter += 5;
+
           console.log(commentsCounter);
+
           comments.innerHTML = newComments.slice(0, commentsCounter).join('');
-    
+
           if (newComments.length <= commentsCounter) {
             commentsCounter = newComments.length;
             commentsLoader.classList.add('hidden');
           }
           socialCommentCount.innerHTML = commentsCounter + ' из ' + newComments.length + ' комментариев';
-        })
+
+          window.addEventListener('click', function (evt) {
+            if (evt.target.id === 'picture-cancel') {
+              bigPicture.classList.add('hidden');
+              body.classList.remove('modal-open');
+              loadMoreComments.removeEventListener('click', loadMoreCommentsHandler)
+            }
+          });
+
+          function escapeHandler(evt) {
+            if (evt.key === 'Escape') {
+              bigPicture.classList.add('hidden');
+              body.classList.remove('modal-open');
+              loadMoreComments.removeEventListener('click', loadMoreCommentsHandler)
+            }
+          }
+        
+          window.addEventListener('keydown', escapeHandler);
+
+        }
+
+        loadMoreComments.addEventListener('click', loadMoreCommentsHandler)
       }
     }
 
