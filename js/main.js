@@ -3,7 +3,7 @@ import { showBigImage } from './big-picture.js';
 import { photos } from './photosTempGen.js';
 import { upload } from './upload.js';
 import { validation } from './validation.js';
-import { resize } from './img-resize.js';
+import { setSize } from './picture-edit.js';
 
 console.log(photos[0]);
 
@@ -13,5 +13,5 @@ for (let i = 0; i < photos.length; i++) {
 
 showBigImage(photos);
 upload();
-resize();
+setSize();
 validation();

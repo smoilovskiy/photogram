@@ -9,7 +9,7 @@ const STEP_VALUE = 25;
 
 let currentValue = MAX_VALUE;
 
-export function resize() {
+export function setSize() {
 
   scaleValue.value = MAX_VALUE + '%';
 
@@ -35,4 +35,8 @@ export function resize() {
 function changeScaleValue() {
   scaleValue.value = currentValue + '%';
   uploadImgPreview.style.transform = `scale(${currentValue / 100})`;
+}
+
+export function setEffect() {
+
 }
