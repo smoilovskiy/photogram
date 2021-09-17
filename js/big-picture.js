@@ -36,6 +36,8 @@ export function showBigImage(photos) {
 
     if (evt.target.className === 'picture__img') {
 
+
+
       comments.innerHTML = '';
       commentsCounter = COMMENTS_COUNT;
 
@@ -85,24 +87,28 @@ export function showBigImage(photos) {
             commentsCounter = newComments.length;
             commentsLoader.classList.add('hidden');
           }
+
           socialCommentCount.innerHTML = commentsCounter + ' из ' + newComments.length + ' комментариев';
 
-          window.addEventListener('click', function (evt) {
-            if (evt.target.id === 'picture-cancel') {
-              loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
-            }
-          });
-
-          window.addEventListener('keydown', function (evt) {
-            if (evt.key === 'Escape') {
-              loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
-            }
-          });
         }
 
         loadMoreComments.addEventListener('click', loadMoreCommentsHandler);
+
+        window.addEventListener('click', function (evt) {
+          if (evt.target.id === 'picture-cancel') {
+            loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
+          }
+        });
+  
+        window.addEventListener('keydown', function (evt) {
+          if (evt.key === 'Escape') {
+            loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
+          }
+        });
       }
     }
+
+
 
 
   });
