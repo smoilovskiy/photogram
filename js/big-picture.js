@@ -36,8 +36,6 @@ export function showBigImage(photos) {
 
     if (evt.target.className === 'picture__img') {
 
-
-
       comments.innerHTML = '';
       commentsCounter = COMMENTS_COUNT;
 
