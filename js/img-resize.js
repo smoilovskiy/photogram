@@ -7,10 +7,11 @@ const MIN_VALUE = 25;
 const MAX_VALUE = 100;
 const STEP_VALUE = 25;
 
-scaleValue.value = MAX_VALUE + '%';
 let currentValue = MAX_VALUE;
 
 export function resize() {
+
+  scaleValue.value = MAX_VALUE + '%';
 
   scale.addEventListener('click', function (evt) {
 
