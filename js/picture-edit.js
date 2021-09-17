@@ -1,6 +1,10 @@
 let scaleValue = document.querySelector('.scale__control--value');
 let scale = document.querySelector('.img-upload__scale');
 let uploadImgPreview = document.querySelector('.img-upload__preview').querySelector('img');
+// let effect = document.querySelector('input[name="effect"]');
+// let effects = document.querySelectorAll('input[name="effect"]');
+let effect = document.querySelector('.effects__radio');
+let effects = document.querySelectorAll('.effects__radio');
 
 
 const MIN_VALUE = 25;
@@ -38,5 +42,15 @@ function changeScaleValue() {
 }
 
 export function setEffect() {
+  uploadImgPreview.classList.add(`effects__preview--none`);
+  if (effect) {
 
+    effects.forEach((elem) => {
+      elem.addEventListener('change', function (evt) {
+        let item = evt.target.value;
+        uploadImgPreview.className = `effects__preview--${item}`;
+        console.log(item);
+      });
+    });
+  }
 }
