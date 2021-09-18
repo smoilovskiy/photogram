@@ -5,7 +5,7 @@ let uploadImgPreview = document.querySelector('.img-upload__preview').querySelec
 // let effects = document.querySelectorAll('input[name="effect"]');
 let effect = document.querySelector('.effects__radio');
 let effects = document.querySelectorAll('.effects__radio');
-
+// let effectValue = ;
 
 const MIN_VALUE = 25;
 const MAX_VALUE = 100;
@@ -42,10 +42,12 @@ function changeScaleValue() {
 }
 
 export function setEffect() {
+   
+
   uploadImgPreview.classList.add(`effects__preview--none`);
   if (effect) {
 
-    effects.forEach((elem) => {
+      effects.forEach((elem) => {
       elem.addEventListener('change', function (evt) {
         let item = evt.target.value;
         uploadImgPreview.className = `effects__preview--${item}`;
