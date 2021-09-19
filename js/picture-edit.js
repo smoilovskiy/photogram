@@ -76,7 +76,7 @@ export function setEffect() {
 
       }
 
-      if (evt.target.id === 'effect-chrome') {
+      if (evt.target.value === 'chrome') {
         sliderContainer.noUiSlider.reset();
         uploadImgPreview.value = 'chrome';
         sliderContainer.noUiSlider.on('update', function (values) {
@@ -85,7 +85,7 @@ export function setEffect() {
         });
       }
 
-      if (evt.target.id === 'effect-sepia') {
+      if (evt.target.value === 'sepia') {
         sliderContainer.noUiSlider.reset();
         uploadImgPreview.value = 'sepia';
         sliderContainer.noUiSlider.on('update', function (values) {
@@ -94,7 +94,7 @@ export function setEffect() {
         });
       }
 
-      if (evt.target.id === 'effect-marvin') {
+      if (evt.target.value === 'marvin') {
         sliderContainer.noUiSlider.reset();
         uploadImgPreview.value = 'marvin';
         sliderContainer.noUiSlider.on('update', function (values) {
@@ -103,7 +103,7 @@ export function setEffect() {
         });
       }
 
-      if (evt.target.id === 'effect-phobos') {
+      if (evt.target.value === 'phobos') {
         sliderContainer.noUiSlider.reset();
         uploadImgPreview.value = 'phobos';
         sliderContainer.noUiSlider.on('update', function (values) {
@@ -112,7 +112,7 @@ export function setEffect() {
         });  
       }
 
-      if (evt.target.id === 'effect-heat') {
+      if (evt.target.value === 'heat') {
         sliderContainer.noUiSlider.reset();
         uploadImgPreview.value = 'heat';
         sliderContainer.noUiSlider.on('update', function (values) {
