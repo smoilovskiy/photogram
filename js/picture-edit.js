@@ -44,87 +44,74 @@ function changeScaleValue() {
   uploadImgPreview.style.transform = `scale(${currentValue / 100})`;
 }
 
-
-
 export function setEffect() {
 
+  noUiSlider.create(sliderContainer, {
+    start: 0,
+    tooltips: true,
+    connect: true,
+    range: {
+      "min": 0,
+      "max": 100
+    }
+  });
 
-  uploadImgPreview.classList.add(`effects__preview--none`);
+  effectSelector.addEventListener('click', function (evt) {
 
+    if (evt.target.value === 'none') {
+      sliderContainer.noUiSlider.reset();
+      uploadImgPreview.value = 'none';
 
-  if (effect) {
+      sliderContainer.noUiSlider.on('update', function () {
+        uploadImgPreview.style.filter = 'none';
+      });
 
-    noUiSlider.create(sliderContainer, {
-      start: 0,
-      tooltips: true,
-      connect: true,
-      range: {
-        "min": 0,
-        "max": 100
-      }
-    });
+    }
 
-    effectSelector.addEventListener('click', function (evt) {
+    if (evt.target.value === 'chrome') {
+      sliderContainer.noUiSlider.reset();
+      uploadImgPreview.value = 'chrome';
+      sliderContainer.noUiSlider.on('update', function (values) {
+        let val = ((values.toString()) / 100).toFixed(2);
+        uploadImgPreview.style.filter = `grayscale(${val})`;
+      });
+    }
 
-      if (evt.target.value === 'none') {
-        sliderContainer.noUiSlider.reset();
-        uploadImgPreview.value = 'none';
-        
-        sliderContainer.noUiSlider.on('update', function () {
-          uploadImgPreview.style.filter = 'none';
-        });
+    if (evt.target.value === 'sepia') {
+      sliderContainer.noUiSlider.reset();
+      uploadImgPreview.value = 'sepia';
+      sliderContainer.noUiSlider.on('update', function (values) {
+        let val = ((values.toString()) / 100).toFixed(2);
+        uploadImgPreview.style.filter = `sepia(${val})`;
+      });
+    }
 
-      }
+    if (evt.target.value === 'marvin') {
+      sliderContainer.noUiSlider.reset();
+      uploadImgPreview.value = 'marvin';
+      sliderContainer.noUiSlider.on('update', function (values) {
+        let val = (values.toString());
+        uploadImgPreview.style.filter = `invert(${val}%)`;
+      });
+    }
 
-      if (evt.target.value === 'chrome') {
-        sliderContainer.noUiSlider.reset();
-        uploadImgPreview.value = 'chrome';
-        sliderContainer.noUiSlider.on('update', function (values) {
-          let val = ((values.toString()) / 100).toFixed(2);
-          uploadImgPreview.style.filter = `grayscale(${val})`;
-        });
-      }
+    if (evt.target.value === 'phobos') {
+      sliderContainer.noUiSlider.reset();
+      uploadImgPreview.value = 'phobos';
+      sliderContainer.noUiSlider.on('update', function (values) {
+        let val = ((values.toString()) / 33).toFixed(1);
+        uploadImgPreview.style.filter = `blur(${val}px)`;
+      });
+    }
 
-      if (evt.target.value === 'sepia') {
-        sliderContainer.noUiSlider.reset();
-        uploadImgPreview.value = 'sepia';
-        sliderContainer.noUiSlider.on('update', function (values) {
-          let val = ((values.toString()) / 100).toFixed(2);
-          uploadImgPreview.style.filter = `sepia(${val})`;
-        });
-      }
-
-      if (evt.target.value === 'marvin') {
-        sliderContainer.noUiSlider.reset();
-        uploadImgPreview.value = 'marvin';
-        sliderContainer.noUiSlider.on('update', function (values) {
-          let val = (values.toString());
-          uploadImgPreview.style.filter = `invert(${val}%)`;
-        });
-      }
-
-      if (evt.target.value === 'phobos') {
-        sliderContainer.noUiSlider.reset();
-        uploadImgPreview.value = 'phobos';
-        sliderContainer.noUiSlider.on('update', function (values) {
-          let val = ((values.toString()) / 33).toFixed(1);
-          uploadImgPreview.style.filter = `blur(${val}px)`;
-        });  
-      }
-
-      if (evt.target.value === 'heat') {
-        sliderContainer.noUiSlider.reset();
-        uploadImgPreview.value = 'heat';
-        sliderContainer.noUiSlider.on('update', function (values) {
-          let val = ((values.toString()) / 50 + 1).toFixed(1);
-          console.log(val);
-          uploadImgPreview.style.filter = `brightness(${val})`;
-        });  
-      }
-
-    })
-
-  }
-
-
+    if (evt.target.value === 'heat') {
+      sliderContainer.noUiSlider.reset();
+      uploadImgPreview.value = 'heat';
+      sliderContainer.noUiSlider.on('update', function (values) {
+        let val = ((values.toString()) / 50 + 1).toFixed(1);
+        console.log(val);
+        uploadImgPreview.style.filter = `brightness(${val})`;
+      });
+    }
+  })
 }
