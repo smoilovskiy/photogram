@@ -56,12 +56,14 @@ export function setEffect() {
     }
   });
 
+  sliderContainer.style.display = 'none';
+
+
   effectSelector.addEventListener('click', function (evt) {
 
     if (evt.target.value === 'none') {
-      sliderContainer.noUiSlider.reset();
+      sliderContainer.style.display = 'none';
       uploadImgPreview.value = 'none';
-
       sliderContainer.noUiSlider.on('update', function () {
         uploadImgPreview.style.filter = 'none';
       });
@@ -69,6 +71,7 @@ export function setEffect() {
     }
 
     if (evt.target.value === 'chrome') {
+      sliderContainer.style.display = 'flex';
       sliderContainer.noUiSlider.reset();
       uploadImgPreview.value = 'chrome';
       sliderContainer.noUiSlider.on('update', function (values) {
@@ -78,6 +81,7 @@ export function setEffect() {
     }
 
     if (evt.target.value === 'sepia') {
+      sliderContainer.style.display = 'flex';
       sliderContainer.noUiSlider.reset();
       uploadImgPreview.value = 'sepia';
       sliderContainer.noUiSlider.on('update', function (values) {
@@ -87,6 +91,7 @@ export function setEffect() {
     }
 
     if (evt.target.value === 'marvin') {
+      sliderContainer.style.display = 'flex';
       sliderContainer.noUiSlider.reset();
       uploadImgPreview.value = 'marvin';
       sliderContainer.noUiSlider.on('update', function (values) {
@@ -96,6 +101,7 @@ export function setEffect() {
     }
 
     if (evt.target.value === 'phobos') {
+      sliderContainer.style.display = 'flex';
       sliderContainer.noUiSlider.reset();
       uploadImgPreview.value = 'phobos';
       sliderContainer.noUiSlider.on('update', function (values) {
@@ -105,13 +111,16 @@ export function setEffect() {
     }
 
     if (evt.target.value === 'heat') {
+      sliderContainer.style.display = 'flex';
       sliderContainer.noUiSlider.reset();
       uploadImgPreview.value = 'heat';
       sliderContainer.noUiSlider.on('update', function (values) {
         let val = ((values.toString()) / 50 + 1).toFixed(1);
-        console.log(val);
         uploadImgPreview.style.filter = `brightness(${val})`;
       });
     }
   })
+
+
+
 }
