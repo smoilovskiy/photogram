@@ -61,6 +61,11 @@ export function setEffect() {
   })
 
   function setFilter(effect) {
+    if (effect === 'none') {
+      sliderField.style.display = 'none';
+    } else {
+      sliderField.style.display = 'block';
+    }
     sliderContainer.noUiSlider.reset();
     uploadImgPreview.value = effect;
     sliderContainer.noUiSlider.on('update', function (values) {
@@ -73,35 +78,26 @@ export function setEffect() {
     let formula, val;
 
     switch (effect) {
-      case 'none':
-        sliderField.style.display = 'none';
-        break;
       case 'chrome':
-        sliderField.style.display = 'block';
         formula = ((values.toString()) / 100).toFixed(2);
         val = `grayscale(${formula})`;
         break;
       case 'sepia':
-        sliderField.style.display = 'block';
         formula = ((values.toString()) / 100).toFixed(2);
         val = `sepia(${formula})`;
         break;
       case 'marvin':
-        sliderField.style.display = 'block';
         formula = (values.toString());
         val = `invert(${formula}%)`;
         break;
       case 'phobos':
-        sliderField.style.display = 'block';
         formula = ((values.toString()) / 33).toFixed(1);
         val = `blur(${formula}px)`;
         break;
       case 'heat':
-        sliderField.style.display = 'block';
         formula = ((values.toString()) / 50 + 1).toFixed(1);
         val = `brightness(${formula})`;
         break;
-
     }
     return val;
   }
