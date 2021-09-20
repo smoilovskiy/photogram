@@ -4,6 +4,7 @@ let uploadImgPreview = document.querySelector('.img-upload__preview').querySelec
 let effects = document.querySelectorAll('.effects__radio');
 let sliderContainer = document.querySelector('.effect-level__slider');
 let sliderField = document.querySelector('.img-upload__effect-level');
+let levelValue = document.querySelector('.effect-level__value');
 
 
 const MIN_VALUE = 25;
@@ -99,6 +100,8 @@ export function setEffect() {
         val = `brightness(${formula})`;
         break;
     }
+    console.log(formula);
+    levelValue.value = formula;
     return val;
   }
 }
