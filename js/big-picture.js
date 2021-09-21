@@ -38,7 +38,7 @@ export function showBigImage(photos) {
       comments.innerHTML = '';
       commentsCounter = COMMENTS_COUNT;
 
-      let id = evt.target.getAttribute('data-id') - 1;
+      let id = evt.target.getAttribute('data-id');
       bigPictureImg.src = photos[id].url;
       bigPictureImg.alt = photos[id].description;
       likes.innerHTML = photos[id].likes;
