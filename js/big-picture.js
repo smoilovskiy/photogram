@@ -16,7 +16,6 @@ let socialCaption = document.querySelector('.social__caption');
 let loadMoreComments = document.querySelector('.social__comments-loader');
 let comments = document.querySelector('.social__comments');
 
-
 export function showBigImage(photos) {
 
 
