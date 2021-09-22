@@ -1,5 +1,7 @@
-import { getData } from "./server.js";
-import { showBigImage } from "./big-picture.js";
+import { getData } from './server.js';
+import { showBigImage } from './big-picture.js';
+import { displayErrorMessage } from './messages.js'
+let quitButton = document.querySelector('.error__button');
 
 getData()
   .then(function (serverAnswer) {
@@ -7,15 +9,11 @@ getData()
       createPreview(serverAnswer[i]);
     }
     showBigImage(serverAnswer);
-    // createPreview(serverAnswer);//serverAnswer[0]
   })
   .catch(function (error) {
-
-    // displayErrorMessage(error);
-    // let quitButton = document.querySelector('.error__button');
-    // quitButton.addEventListener('click', getData)
+    displayErrorMessage(error, 'Try again');    
+    quitButton.addEventListener('click', getData)
   })
-
 
 export function createPreview(photo) {
   console.log(photo);

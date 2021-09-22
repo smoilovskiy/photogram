@@ -1,9 +1,5 @@
-// import { displayErrorMessage } from './messages.js';
-
-const dataForm = document.querySelector('.ad-form');
-const resetBttn = document.querySelector('.ad-form__reset');
-const main = document.querySelector('main');
-
+import { displayErrorMessage, displaySuccessMessage } from "./messages.js";
+const dataForm = document.querySelector('.img-upload__form');
 
 export async function getData() {
 
@@ -18,80 +14,28 @@ export async function getData() {
 }
 
 
+dataForm.addEventListener('submit', sendData);
 
-// dataForm.addEventListener('submit', sendData);
+export async function sendData(evt) {
+  evt.preventDefault();
 
-// export async function sendData(e) {
-//   e.preventDefault();
+  const formData = new FormData(dataForm);
 
-//   const formData = new FormData(dataForm);
+  let responce = await fetch('https://23.javascript.pages.academy/kekstagram', {
+    method: 'POST',
+    body: formData
+  });
 
-//   let responce = await fetch('https://23.javascript.pages.academy/keksobooking', {
-//     method: 'POST',
-//     body: formData
-//   });
+  function action(response) {
 
-//   function action(response) {
+    console.log(response.status);
 
-//     console.log(response.status);
-
-//     if (response.status === 200) {
-//       let elem = document.createElement('div');
-//       let clone = success.content.cloneNode(true);
-//       elem.append(clone);
-//       main.append(elem);
-
-//       dataForm.reset();
-
-//       window.addEventListener('click', templateClick);
-//       window.addEventListener('keydown', templateKey);
-
-//       function templateClick(evt) {
-
-//         if (evt.target.className === 'success') {
-
-//           elem.style.display = 'none';
-//           document.location.reload();
-//         }
-//       }
-
-//       function templateKey(ev) {
-//         if (ev.keyCode == 27) {
-//           elem.style.display = 'none';
-//           document.location.reload();
-//         }
-//       }
-
-
-//     } else {
-
-//       let elem = document.createElement('div');
-//       let clone = error.content.cloneNode(true);
-//       elem.append(clone);
-//       main.append(elem);
-
-//       window.addEventListener('keydown', templateKey);
-//       window.addEventListener('click', templateClick);
-
-//       function templateKey(evt) {
-//         if (evt.keyCode == 27) {
-//           elem.style.display = 'none';
-//         }
-//       }
-
-//       function templateClick(evt) {
-//         if (evt.target.className === 'error__button') {
-//           elem.style.display = 'none';
-//         }
-//       }
-//     }
-//   }
-
-
-//   action(responce);
-
-// }
-
-// resetBttn.addEventListener('click', () => {
-//   dataForm.reset()
-// })
+    if (response.status === 200) {
+      dataForm.reset();
+      displaySuccessMessage();
+    } else {
+      displayErrorMessage('Ошибка отправки фотографии', 'Закрыть');
+    }
+  }
+  action(responce);
+}
