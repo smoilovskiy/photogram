@@ -62,7 +62,6 @@ export function showBigImage(photos) {
       })
 
       if (newComments.length <= COMMENTS_COUNT) {
-        //commentsCounter = COMMENTS_COUNT;
         comments.innerHTML = newComments.join('');
         socialCommentCount.classList.remove('hidden');
         socialCommentCount.innerHTML = newComments.length + ' из ' + newComments.length + ' комментариев';
