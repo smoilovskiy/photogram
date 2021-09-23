@@ -1,14 +1,12 @@
 import { getData } from './server.js';
-import { showBigImage } from './big-picture.js';
+import { imgFilters } from './filter.js';
 import { displayErrorMessage } from './messages.js'
+
 let quitButton = document.querySelector('.error__button');
 
 getData()
   .then(function (serverAnswer) {
-    for (let i = 0; i < serverAnswer.length; i++) {
-      createPreview(serverAnswer[i]);
-    }
-    showBigImage(serverAnswer);
+    imgFilters(serverAnswer);
   })
   .catch(function (error) {
     displayErrorMessage(error, 'Try again');    
@@ -16,7 +14,6 @@ getData()
   })
 
 export function createPreview(photo) {
-  console.log(photo);
 
   let pictures = document.querySelector('.pictures');
   let fragment = document.createDocumentFragment();
@@ -35,6 +32,4 @@ export function createPreview(photo) {
 
   fragment.appendChild(preview);
   pictures.appendChild(fragment);
-
-  console.log(preview);
 }
