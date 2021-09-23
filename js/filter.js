@@ -22,8 +22,9 @@ export function imgFilters(response) {
       filterRandom.classList.remove('img-filters__button--active');
       filterDiscussed.classList.remove('img-filters__button--active');
       clearThumbnails();
-      showThumbnails(response);
-      console.log(response);
+      filtered = response.slice();
+      showThumbnails(filtered);
+      // console.log(response);
     }
 
     if (evt.target.id === 'filter-random') {
@@ -47,18 +48,20 @@ export function imgFilters(response) {
         return parseInt(b.comments.length) - parseInt(a.comments.length);
       });
 
-      console.log(filtered);
+      // console.log(filtered);
       clearThumbnails();
       showThumbnails(filtered);
     }
   });
-
+  console.log(response);
 }
 
 function showThumbnails(filtered) {
   for (let i = 0; i < filtered.length; i++) {
     createPreview(filtered[i]);
   }
+
+  console.log(filtered);
   showBigImage(filtered);
 }
 

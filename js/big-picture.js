@@ -39,22 +39,25 @@ export function showBigImage(photos) {
       commentsCounter = COMMENTS_COUNT;
 
       let id = evt.target.getAttribute('data-id');
-      bigPictureImg.src = photos[id].url;
-      bigPictureImg.alt = photos[id].description;
-      likes.innerHTML = photos[id].likes;
-      commentsCount.innerHTML = photos[id].comments.length;
+
+      let photo = photos.find(img => img.id == id);
+
+      bigPictureImg.src = photo.url;
+      bigPictureImg.alt = photo.description;
+      likes.innerHTML = photo.likes;
+      commentsCount.innerHTML = photo.comments.length;
 
 
-      socialCommentCount.innerHTML = '5 из ' + photos[id].comments.length + ' комментариев';
+      socialCommentCount.innerHTML = '5 из ' + photo.comments.length + ' комментариев';
       commentsLoader.classList.add('hidden');
       body.classList.add('modal-open');
       bigPicture.classList.remove('hidden');
 
 
-      socialCaption.innerHTML = photos[id].description;
+      socialCaption.innerHTML = photo.description;
 
 
-      let newComments = photos[id].comments.map(comment => {
+      let newComments = photo.comments.map(comment => {
         return `<li class="social__comment">
         <img class="social__picture" src='${comment.avatar}' alt="Аватар комментатора фотографии" width="35" height="35">
         <p class="social__text">${comment.message}</p>
