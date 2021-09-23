@@ -21,18 +21,18 @@ export function imgFilters(response) {
       filterDefault.classList.add('img-filters__button--active');
       filterRandom.classList.remove('img-filters__button--active');
       filterDiscussed.classList.remove('img-filters__button--active');
-      filtered = response;
       clearThumbnails();
-      showThumbnails(filtered);
+      showThumbnails(response);
+      console.log(response);
     }
 
     if (evt.target.id === 'filter-random') {
       filterRandom.classList.add('img-filters__button--active');
       filterDefault.classList.remove('img-filters__button--active');
       filterDiscussed.classList.remove('img-filters__button--active');
-      filtered = response.slice(0, 10);
-      console.log(filtered);
       clearThumbnails();
+      filtered = response.slice();
+      filtered = shuffle(filtered).slice(0, 10);
       showThumbnails(filtered);
     }
 
@@ -64,9 +64,9 @@ function clearThumbnails() {
   });
 }
 
-
-
-
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
 
 
 
