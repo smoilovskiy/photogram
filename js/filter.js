@@ -7,6 +7,7 @@ let filterDefault = document.querySelector('#filter-default');
 let filterRandom = document.querySelector('#filter-random');
 let filterDiscussed = document.querySelector('#filter-discussed');
 
+
 let filtered = [];
 
 export function imgFilters(response) {
@@ -71,6 +72,11 @@ function clearThumbnails() {
   picturesToRemove.forEach(function (photo) {
     photoContainerElement.removeChild(photo);
   });
+
+  // let loadMoreComments = document.querySelector('.social__comments-loader');
+  // loadMoreComments.removeEventListener('click', this, false);
+
+
 }
 
 function shuffle(array) {

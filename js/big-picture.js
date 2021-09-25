@@ -16,8 +16,10 @@ let socialCaption = document.querySelector('.social__caption');
 let loadMoreComments = document.querySelector('.social__comments-loader');
 let comments = document.querySelector('.social__comments');
 
-export function showBigImage(photos) {
 
+
+
+export function showBigImage(photos) {
 
   textCommentInput.addEventListener('focus', function () {
     window.removeEventListener('keydown', escapeHandler)
@@ -31,84 +33,84 @@ export function showBigImage(photos) {
     window.addEventListener('keydown', escapeHandler)
   })
 
+
+
+
   pictures.addEventListener('click', function (evt) {
 
-    if (evt.target.className === 'picture__img') {
+    comments.innerHTML = '';
+    commentsCounter = COMMENTS_COUNT;
 
-      comments.innerHTML = '';
-      commentsCounter = COMMENTS_COUNT;
+    let id = evt.target.getAttribute('data-id');
 
-      let id = evt.target.getAttribute('data-id');
+    let photo = photos.find(img => img.id == id);
 
-      let photo = photos.find(img => img.id == id);
-
-      bigPictureImg.src = photo.url;
-      bigPictureImg.alt = photo.description;
-      likes.innerHTML = photo.likes;
-      commentsCount.innerHTML = photo.comments.length;
+    bigPictureImg.src = photo.url;
+    bigPictureImg.alt = photo.description;
+    likes.innerHTML = photo.likes;
+    commentsCount.innerHTML = photo.comments.length;
 
 
-      socialCommentCount.innerHTML = '5 из ' + photo.comments.length + ' комментариев';
-      commentsLoader.classList.add('hidden');
-      body.classList.add('modal-open');
-      bigPicture.classList.remove('hidden');
+    socialCommentCount.innerHTML = '5 из ' + photo.comments.length + ' комментариев';
+    commentsLoader.classList.add('hidden');
+    body.classList.add('modal-open');
+    bigPicture.classList.remove('hidden');
 
 
-      socialCaption.innerHTML = photo.description;
+    socialCaption.innerHTML = photo.description;
 
 
-      let newComments = photo.comments.map(comment => {
-        return `<li class="social__comment">
+    let newComments = photo.comments.map(comment => {
+      return `<li class="social__comment">
         <img class="social__picture" src='${comment.avatar}' alt="Аватар комментатора фотографии" width="35" height="35">
         <p class="social__text">${comment.message}</p>
         </li>`
-      })
+    })
 
-      if (newComments.length <= COMMENTS_COUNT) {
-        comments.innerHTML = newComments.join('');
-        socialCommentCount.classList.remove('hidden');
-        socialCommentCount.innerHTML = newComments.length + ' из ' + newComments.length + ' комментариев';
-      } else {
-        commentsCounter = COMMENTS_COUNT;
+    if (newComments.length <= COMMENTS_COUNT) {
+      comments.innerHTML = newComments.join('');
+      socialCommentCount.classList.remove('hidden');
+      socialCommentCount.innerHTML = newComments.length + ' из ' + newComments.length + ' комментариев';
+
+    } else {
+
+      commentsCounter = COMMENTS_COUNT;
+      comments.innerHTML = newComments.slice(0, commentsCounter).join('');
+      socialCommentCount.classList.remove('hidden');
+      commentsLoader.classList.remove('hidden');
+
+      loadMoreComments.addEventListener('click', loadMoreCommentsHandler);
+
+
+      function loadMoreCommentsHandler() {
+        commentsCounter += 5;
+
+        //debugger
+        console.log(commentsCounter);
+
         comments.innerHTML = newComments.slice(0, commentsCounter).join('');
-        socialCommentCount.classList.remove('hidden');
-        commentsLoader.classList.remove('hidden');
 
-
-        function loadMoreCommentsHandler() {
-          commentsCounter += 5;
-
-          console.log(commentsCounter);
-
-          comments.innerHTML = newComments.slice(0, commentsCounter).join('');
-
-          if (newComments.length <= commentsCounter) {
-            commentsCounter = newComments.length;
-            commentsLoader.classList.add('hidden');
-          }
-
-          socialCommentCount.innerHTML = commentsCounter + ' из ' + newComments.length + ' комментариев';
-
+        if (newComments.length <= commentsCounter) {
+          commentsCounter = newComments.length;
+          commentsLoader.classList.add('hidden');
         }
-
-        loadMoreComments.addEventListener('click', loadMoreCommentsHandler);
-
-        window.addEventListener('click', function (evt) {
-          if (evt.target.id === 'picture-cancel') {
-            loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
-          }
-        });
-  
-        window.addEventListener('keydown', function (evt) {
-          if (evt.key === 'Escape') {
-            loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
-          }
-        });
+        socialCommentCount.innerHTML = commentsCounter + ' из ' + newComments.length + ' комментариев';
       }
+
+      window.addEventListener('click', function (evt) {
+
+        if (evt.target.id === 'picture-cancel') {
+          loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
+        }
+      });
+
+      window.addEventListener('keydown', function (evt) {
+        if (evt.key === 'Escape') {
+          loadMoreComments.removeEventListener('click', loadMoreCommentsHandler);
+        }
+      });
+
     }
-
-
-
 
   });
 
