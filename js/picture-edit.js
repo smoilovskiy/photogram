@@ -5,6 +5,10 @@ let effects = document.querySelectorAll('.effects__radio');
 let sliderContainer = document.querySelector('.effect-level__slider');
 let sliderField = document.querySelector('.img-upload__effect-level');
 let levelValue = document.querySelector('.effect-level__value');
+let hashtagsInput = document.querySelector('.text__hashtags');
+let textCommentInput = document.querySelector('.text__description');
+
+
 
 
 const MIN_VALUE = 25;
@@ -105,3 +109,24 @@ export function setEffect() {
     return val;
   }
 }
+
+textCommentInput.addEventListener('focus', function () {
+  window.removeEventListener('keydown', escapeHandler)
+})
+
+hashtagsInput.addEventListener('focus', function () {
+  window.removeEventListener('keydown', escapeHandler)
+})
+
+hashtagsInput.addEventListener('blur', function () {
+  window.addEventListener('keydown', escapeHandler)
+})
+
+function escapeHandler(evt) {
+  if (evt.key === 'Escape') {
+    // bigPicture.classList.add('hidden');
+    // body.classList.remove('modal-open');
+  }
+}
+
+window.addEventListener('keydown', escapeHandler);

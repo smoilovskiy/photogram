@@ -8,13 +8,15 @@ let filterRandom = document.querySelector('#filter-random');
 let filterDiscussed = document.querySelector('#filter-discussed');
 
 
-let filtered = [];
-
 export function imgFilters(response) {
-
+  let filtered = response;
   imgFilterContainer.classList.remove('img-filters--inactive');
-
   showThumbnails(response);
+
+  let listener = document.addEventListener('click', function (evt) {
+    showBigImage(evt, response);
+  })
+
 
   imgFilter.addEventListener('click', function (evt) {
 
@@ -25,7 +27,6 @@ export function imgFilters(response) {
       clearThumbnails();
       filtered = response.slice();
       showThumbnails(filtered);
-      // console.log(response);
     }
 
     if (evt.target.id === 'filter-random') {
@@ -42,28 +43,20 @@ export function imgFilters(response) {
       filterDiscussed.classList.add('img-filters__button--active');
       filterDefault.classList.remove('img-filters__button--active');
       filterRandom.classList.remove('img-filters__button--active');
-
       filtered = response.slice();
-
       filtered.sort(function (a, b) {
         return parseInt(b.comments.length) - parseInt(a.comments.length);
       });
-
-      // console.log(filtered);
       clearThumbnails();
       showThumbnails(filtered);
     }
   });
-  console.log(response);
 }
 
 function showThumbnails(filtered) {
   for (let i = 0; i < filtered.length; i++) {
     createPreview(filtered[i]);
   }
-
-  console.log(filtered);
-  showBigImage(filtered);
 }
 
 function clearThumbnails() {
@@ -72,11 +65,13 @@ function clearThumbnails() {
   picturesToRemove.forEach(function (photo) {
     photoContainerElement.removeChild(photo);
   });
+  document.removeEventListener('click', clickListener)
+}
 
-  // let loadMoreComments = document.querySelector('.social__comments-loader');
-  // loadMoreComments.removeEventListener('click', this, false);
-
-
+function clickListener(filtered) {
+  document.addEventListener('click', function (evt) {
+    showBigImage(evt, filtered);
+  })
 }
 
 function shuffle(array) {

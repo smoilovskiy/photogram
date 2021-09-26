@@ -19,30 +19,13 @@ let comments = document.querySelector('.social__comments');
 
 
 
-export function showBigImage(photos) {
+export function showBigImage(evt, photos) {
 
-  textCommentInput.addEventListener('focus', function () {
-    window.removeEventListener('keydown', escapeHandler)
-  })
-
-  hashtagsInput.addEventListener('focus', function () {
-    window.removeEventListener('keydown', escapeHandler)
-  })
-
-  hashtagsInput.addEventListener('blur', function () {
-    window.addEventListener('keydown', escapeHandler)
-  })
-
-
-
-
-  pictures.addEventListener('click', function (evt) {
+  if (evt.target.className === 'picture__img') {
 
     comments.innerHTML = '';
     commentsCounter = COMMENTS_COUNT;
-
     let id = evt.target.getAttribute('data-id');
-
     let photo = photos.find(img => img.id == id);
 
     bigPictureImg.src = photo.url;
@@ -50,13 +33,10 @@ export function showBigImage(photos) {
     likes.innerHTML = photo.likes;
     commentsCount.innerHTML = photo.comments.length;
 
-
     socialCommentCount.innerHTML = '5 из ' + photo.comments.length + ' комментариев';
     commentsLoader.classList.add('hidden');
     body.classList.add('modal-open');
     bigPicture.classList.remove('hidden');
-
-
     socialCaption.innerHTML = photo.description;
 
 
@@ -84,10 +64,6 @@ export function showBigImage(photos) {
 
       function loadMoreCommentsHandler() {
         commentsCounter += 5;
-
-        //debugger
-        console.log(commentsCounter);
-
         comments.innerHTML = newComments.slice(0, commentsCounter).join('');
 
         if (newComments.length <= commentsCounter) {
@@ -111,23 +87,61 @@ export function showBigImage(photos) {
       });
 
     }
-
-  });
-
-  window.addEventListener('click', function (evt) {
-    if (evt.target.id === 'picture-cancel') {
-      bigPicture.classList.add('hidden');
-      body.classList.remove('modal-open');
-    }
-  });
-
-  function escapeHandler(evt) {
-    if (evt.key === 'Escape') {
-      bigPicture.classList.add('hidden');
-      body.classList.remove('modal-open');
-    }
   }
-
-  window.addEventListener('keydown', escapeHandler);
-
 }
+
+window.addEventListener('click', function (evt) {
+  if (evt.target.id === 'picture-cancel') {
+    bigPicture.classList.add('hidden');
+    body.classList.remove('modal-open');
+  }
+});
+
+function escapeHandler(evt) {
+  if (evt.key === 'Escape') {
+    bigPicture.classList.add('hidden');
+    body.classList.remove('modal-open');
+  }
+}
+
+window.addEventListener('keydown', escapeHandler);
+
+
+
+
+// export function showBigImage(photos) {
+
+//   textCommentInput.addEventListener('focus', function () {
+//     window.removeEventListener('keydown', escapeHandler)
+//   })
+
+//   hashtagsInput.addEventListener('focus', function () {
+//     window.removeEventListener('keydown', escapeHandler)
+//   })
+
+//   hashtagsInput.addEventListener('blur', function () {
+//     window.addEventListener('keydown', escapeHandler)
+//   })
+
+
+
+
+
+
+//   window.addEventListener('click', function (evt) {
+//     if (evt.target.id === 'picture-cancel') {
+//       bigPicture.classList.add('hidden');
+//       body.classList.remove('modal-open');
+//     }
+//   });
+
+//   function escapeHandler(evt) {
+//     if (evt.key === 'Escape') {
+//       bigPicture.classList.add('hidden');
+//       body.classList.remove('modal-open');
+//     }
+//   }
+
+//   window.addEventListener('keydown', escapeHandler);
+
+// }
