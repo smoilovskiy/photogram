@@ -4,7 +4,7 @@ export function upload() {
   let uploadImg = document.querySelector('#upload-file');
   let uploadImgPopup = document.querySelector('.img-upload__overlay');
   // for user photo upload
-  //let uploadImgPreview = document.querySelector('.img-upload__preview').querySelector('img');
+  let uploadImgPreview = document.querySelector('.img-upload__preview').querySelector('img');
 
   uploadImg.addEventListener('change', function () {
     let file = uploadImg.files[0];
@@ -15,7 +15,7 @@ export function upload() {
       uploadImgPopup.classList.remove('hidden');
       body.classList.add('modal-open');
       // for user photo upload
-      //uploadImgPreview.src = reader.result;
+      uploadImgPreview.src = reader.result;
     });
 
     reader.readAsDataURL(file);
