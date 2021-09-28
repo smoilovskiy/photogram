@@ -54,8 +54,8 @@ export function imgFilters(response) {
 }
 
 function showThumbnails(filtered) {
-  for (let i = 0; i < filtered.length; i++) {
-    createPreview(filtered[i]);
+  for (let photo of filtered) {
+    createPreview(photo);
   }
 }
 
